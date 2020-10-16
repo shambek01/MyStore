@@ -196,7 +196,6 @@ header form{
     flex-direction: column;
     height:415px;
     width:255px;
-    background-color:;
     border:1px rgba(0, 0, 0, 0.04) solid;
     transition:0.3s ease;
     border-radius: 5px;
@@ -305,7 +304,6 @@ header form{
     outline: none;
 }
 .form{
-    display:;
     left: 50%;
     top:50%;
     background-color: #FFF;
@@ -364,7 +362,7 @@ header form{
     margin: 0 10px;
 }
 .delivery select option{
-    padding: 3 10px;
+    padding: 3px 10px;
 }
 .basket-wrapper{
     width:100%;
@@ -407,7 +405,6 @@ header form{
 .basket-product{
     display:flex;
     align-items: center;
-    height:;
     justify-content: space-between;
     margin-top: 10px;
     border: 1px solid rgba(0,0,0,0.2);
@@ -494,7 +491,6 @@ input[type="date"]{
     margin-left: 10px;
     height: 40px;
     font-size: 18px;
-    font-weight:;
     background-color: var(--main-black);
     border-collapse:collapse;
     border: 0;
@@ -555,7 +551,6 @@ input[type="date"]{
     margin-left: 10px;
     height: 40px;
     font-size: 18px;
-    font-weight:;
     background-color: var(--main-black);
     border-collapse:collapse;
     border: 0;
