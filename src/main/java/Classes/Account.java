@@ -2,7 +2,7 @@ package Classes;
 
 public class Account {
     private int accountId;
-    private String username;
+    private String login;
     private String password;
     private String name;
     private String surname;
@@ -10,7 +10,7 @@ public class Account {
 
     public Account(int accountId, String username, String password, String name, String surname, String email) {
         this.accountId = accountId;
-        this.username = username;
+        this.login = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
@@ -27,12 +27,12 @@ public class Account {
 
 
 
-    public String getUsername() {
-        return username;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLogin(String username) {
+        this.login = username;
     }
 
     public String getPassword() {

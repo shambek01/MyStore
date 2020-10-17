@@ -7,6 +7,9 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:if test="${empty cookie['user']}">
+    <c:redirect url="LoginServlet" />
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +20,7 @@
     <title>NIS SHOP</title>
 </head>
 <body>
+<c:import url = "header.jsp"/>
 <div class="main-wrapper">
     <div class="banner">
         <div class="banner-text">
@@ -27,8 +31,9 @@
         <h1>Новое в продаже</h1>
         <!-- Popular products retrieved -->
         <div class="product-grid">
+            <!--<h1>${cookie['user'].value}</h1>-->
             <c:forEach var="product" items="${products}">
-            <form method="post" action="index.php">
+            <form method="post" action="index.jsp">
                 <div class="product-item">
                     <input type="hidden" name="productid" value="${product.productId}">
                     <img class="product-item-img" src='${product.productImage}'>
@@ -49,6 +54,7 @@
         </div>
     </div>
 </div>
+<c:import url = "footer.jsp"/>
 <script src="https://kit.fontawesome.com/a73d7e7c2a.js" crossorigin="anonymous"></script>
 <script src="js/script.js"></script>
 </body>
