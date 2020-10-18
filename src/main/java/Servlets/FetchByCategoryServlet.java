@@ -11,17 +11,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.PriorityQueue;
 
-@WebServlet(name = "IndexServlet")
-public class IndexServlet extends HttpServlet {
+@WebServlet(name = "FetchByCategoryServlet")
+public class FetchByCategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         iProductDB productDB = new ProductDB();
-        ArrayList<Product> products = productDB.select();
+        String category = request.getParameter("category");
+        int categoryId = Integer.parseInt(category);
+        System.out.println(categoryId);
+        HashMap<Integer,Product> products = productDB.selectByCategory(categoryId);
+        System.out.println(products);
         request.setAttribute("products", products);
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/products.jsp").forward(request, response);
     }
 }

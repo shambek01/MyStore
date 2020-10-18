@@ -24,7 +24,7 @@
 <div class="main-wrapper">
     <div class="banner">
         <div class="banner-text">
-            <span class="big-text" style="color:black">RANDOM SHOP</span>
+            <span class="big-text" style="color:black">CLOTHES SHOP</span>
         </div>
     </div>
     <div class="product-line">
@@ -33,23 +33,23 @@
         <div class="product-grid">
             <!--<h1>${cookie['user'].value}</h1>-->
             <c:forEach var="product" items="${products}">
-            <form method="post" action="index.jsp">
-                <div class="product-item">
-                    <input type="hidden" name="productid" value="${product.productId}">
-                    <img class="product-item-img" src='${product.productImage}'>
-                    <label class="product-item-name">${product.description}
-                    </label>
-                    <label class="product-item-price">${product.price} tg</label>
-                </div>
-                <div class="controls-container">
-                    <div class="controls-count">
-                        <button class="input-button" onclick="decreaseValue('${product.productId}');return false">-</button>
-                        <input type="number" id="${product.productId}" min="1" value="1" name="count">
-                        <button class="input-button" onclick="increaseValue('${product.productId}');return false">+</button>
+                <form method="post" action="index.jsp">
+                    <div class="product-item">
+                        <input type="hidden" name="productid" value="${product.value.productId}">
+                        <img class="product-item-img" src='${product.value.productImage}'>
+                        <label class="product-item-name">${product.value.description}
+                        </label>
+                        <label class="product-item-price">${product.value.price} tg</label>
                     </div>
-                    <button class="basket-button" type="submit" name="submit"><i class="fas fa-shopping-cart"></i></button>
-                </div>
-            </form>
+                    <div class="controls-container">
+                        <div class="controls-count">
+                            <button class="input-button" onclick="decreaseValue('${product.value.productId}');return false">-</button>
+                            <input type="number" id="${product.value.productId}" min="1" value="1" name="count">
+                            <button class="input-button" onclick="increaseValue('${product.value.productId}');return false">+</button>
+                        </div>
+                        <button class="basket-button" type="submit" name="submit"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </form>
             </c:forEach>
         </div>
     </div>

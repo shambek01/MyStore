@@ -5,16 +5,16 @@ public class Product {
     private String description;
     private int price;
 
-    public Product(int productId, String description, int price, String productImage, String category) {
+    public Product(int productId, String description, int price, String productImage, int category) {
         this.productId = productId;
         this.description = description;
         this.price = price;
         this.productImage = productImage;
-        this.category = category;
+        this.categoryId = category;
     }
 
     private String productImage;
-    private String category;
+    private int categoryId;
     public int getProductId() {
         return productId;
     }
@@ -47,12 +47,12 @@ public class Product {
         this.productImage = productImage;
     }
 
-    public String getCategory() {
-        return category;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryId(int category) {
+        this.categoryId = category;
     }
 
 

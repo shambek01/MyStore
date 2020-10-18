@@ -27,7 +27,7 @@
             <label>Password</label>
             <input type="password" id="userpassword" name="password" required>
             <input type="submit" id="log-btn"  name="log-in" class="submit" value="Login">
-            <a href="registration.jsp">Регистрация</a>
+            <a href="registration.jsp">Sign up</a>
         </form>
     </div>
 </div>

@@ -2,7 +2,7 @@ package Servlets;
 
 import Classes.Account;
 import DBClasses.AccountDB;
-import DBClasses.ProductDB;
+import Interfaces.iAccountDB;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -19,8 +18,9 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+        iAccountDB accountDB = new AccountDB();
         try{
-            Account account = AccountDB.selectByLogin(login);
+            Account account = accountDB.selectByLogin(login);
             if(account.getPassword().equals(password)){
                 response.addCookie(new Cookie("user",login));
 

@@ -30,4 +30,28 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <servlet-class>Servlets.RegistrationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <url-pattern>/RegistrationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CategoryServlet</servlet-name>
+        <servlet-class>Servlets.CategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CategoryServlet</servlet-name>
+        <url-pattern>/CategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>FetchByCategoryServlet</servlet-name>
+        <servlet-class>Servlets.FetchByCategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FetchByCategoryServlet</servlet-name>
+        <url-pattern>/FetchByCategoryServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

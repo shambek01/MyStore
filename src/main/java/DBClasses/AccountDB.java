@@ -1,18 +1,20 @@
 package DBClasses;
 
 import Classes.Account;
+import Interfaces.iAccountDB;
 
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
-public class AccountDB {
-    private static String sqlurl = "jdbc:mysql://localhost/shopdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+public class AccountDB implements iAccountDB {
+    private static String sqlurl = "jdbc:mysql://localhost/mystoredb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static String sqlusername = "root";
     private static String sqlpassword = "";
-    public static ArrayList<Account> select() {
+    public PriorityQueue<Account> select() {
 
-        ArrayList<Account> accounts = new ArrayList<Account>();
+        PriorityQueue<Account> accounts = new PriorityQueue<Account>();
         try{
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             try (Connection conn = DriverManager.getConnection(sqlurl, sqlusername, sqlpassword)){
@@ -37,7 +39,7 @@ public class AccountDB {
         }
         return accounts;
     }
-    public static Account selectById(int id){
+    public Account selectById(int id){
         Account account = null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
@@ -63,7 +65,7 @@ public class AccountDB {
         }
         return account;
     }
-    public static Account selectByLogin(String login){
+    public Account selectByLogin(String login){
         Account account = null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
@@ -88,5 +90,28 @@ public class AccountDB {
             System.out.println(ex);
         }
         return account;
+    }
+
+
+
+    public int insert(String login, String password, String name, String surname, String email){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(sqlurl, sqlusername, sqlpassword)){
+                String sql = "INSERT INTO accounts (login, password,name,surname,email) Values (?,?,?,?,?)";
+                try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+                    preparedStatement.setString(1, login);
+                    preparedStatement.setString(2, password);
+                    preparedStatement.setString(3, name);
+                    preparedStatement.setString(4, surname);
+                    preparedStatement.setString(5, email);
+                    return  preparedStatement.executeUpdate();
+                }
+            }
+        }
+        catch(Exception ex){
+            System.out.println(ex);
+        }
+        return 0;
     }
 }

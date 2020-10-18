@@ -5,7 +5,8 @@
   Time: 18:44
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="auth-bar">
     <ul>
         <a><li>${cookie['user'].value}</li></a>
@@ -13,11 +14,11 @@
     </ul>
 </div>
 <header>
-    <label><a href="index.php"><img class="header-logo" src="images/nislogo.png">SHOP</a></label>
+    <label><a href="IndexServlet"><img class="header-logo" src="images/nislogo.png">SHOP</a></label>
     <ul>
-        <form method="GET" action="" style="border-bottom:1px solid black"><div class="fa fa-search"></div><input type="text" class="search-input" name="search" placeholder="Поиск одежды"></form>
-        <a><li>Мужское</li></a>
-        <a><li>Женское</li></a>
+        <c:forEach var="category" items="${categories}">
+        <a href="FetchByCategoryServlet?category=${category.categoryId}"><li>${category.categoryName}</li></a>
+        </c:forEach>
         <a><li>Корзина()</li></a>
     </ul>
 </header>
