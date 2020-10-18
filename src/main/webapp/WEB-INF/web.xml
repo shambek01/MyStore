@@ -62,4 +62,12 @@
         <servlet-name>AddToCartServlet</servlet-name>
         <url-pattern>/AddToCartServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ConfirmationServlet</servlet-name>
+        <servlet-class>Servlets.ConfirmationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfirmationServlet</servlet-name>
+        <url-pattern>/ConfirmationServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
