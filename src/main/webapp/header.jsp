@@ -14,7 +14,7 @@
     </ul>
 </div>
 <header>
-    <label><a href="IndexServlet"><img class="header-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRoOrFwnPTSi-n0Bep75ogLpIrLEDM-fg72cg&usqp=CAU">SHOP</a></label>
+    <label><a href="IndexServlet"><img class="header-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRoOrFwnPTSi-n0Bep75ogLpIrLEDM-fg72cg&usqp=CAU">${shopname}</a></label>
     <ul>
         <c:forEach var="category" items="${categories}">
         <a href="FetchByCategoryServlet?category=${category.categoryId}"><li>${category.categoryName}</li></a>

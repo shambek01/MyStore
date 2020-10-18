@@ -19,8 +19,10 @@ public class CategoryServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String shopname = getServletContext().getInitParameter("shopname");
         iCategoryDB categoryDB = new CategoryDB();
         HashSet<Category> categories = categoryDB.select();
+        request.setAttribute("shopname",shopname);
         request.setAttribute("categories", categories);
         getServletContext().getRequestDispatcher("/header.jsp").forward(request, response);
     }
