@@ -14,11 +14,11 @@
     </ul>
 </div>
 <header>
-    <label><a href="IndexServlet"><img class="header-logo" src="images/nislogo.png">SHOP</a></label>
+    <label><a href="IndexServlet"><img class="header-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRoOrFwnPTSi-n0Bep75ogLpIrLEDM-fg72cg&usqp=CAU">SHOP</a></label>
     <ul>
         <c:forEach var="category" items="${categories}">
         <a href="FetchByCategoryServlet?category=${category.categoryId}"><li>${category.categoryName}</li></a>
         </c:forEach>
-        <a><li>Корзина()</li></a>
+        <a href="cart.jsp"><li>Cart</li></a>
     </ul>
 </header>

@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
             Account account = accountDB.selectByLogin(login);
             if(account.getPassword().equals(password)){
                 response.addCookie(new Cookie("user",login));
-
+                accountDB.login(login);
                 System.out.println("Login is done");
                 response.sendRedirect("IndexServlet");
             }

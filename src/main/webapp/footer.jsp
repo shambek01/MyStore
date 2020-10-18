@@ -12,7 +12,7 @@
 </head>
 <body>
 <footer>
-    <label><a href=#><img class="header-logo" src="images/nislogo.png">SHOP</a></label>
+    <label><a href=#><img class="header-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRoOrFwnPTSi-n0Bep75ogLpIrLEDM-fg72cg&usqp=CAU">SHOP</a></label>
 </footer>
 </body>
 </html>

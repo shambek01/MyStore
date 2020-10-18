@@ -24,6 +24,7 @@ public class RegistrationServlet extends HttpServlet {
         if(accountDB.selectByLogin(login)==null){
             accountDB.insert(login,password,name,surname,email);
             response.addCookie(new Cookie("user",login));
+            accountDB.create();
             System.out.println("Registration is done");
             response.sendRedirect("IndexServlet");
         }

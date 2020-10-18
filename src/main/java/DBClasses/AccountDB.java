@@ -1,6 +1,7 @@
 package DBClasses;
 
 import Classes.Account;
+import Classes.Stats;
 import Interfaces.iAccountDB;
 
 
@@ -45,7 +46,7 @@ public class AccountDB implements iAccountDB {
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             try (Connection conn = DriverManager.getConnection(sqlurl, sqlusername, sqlpassword)){
 
-                String sql = "SELECT * FROM accounts WHERE id=?";
+                String sql = "SELECT * FROM accounts WHERE account_id=?";
                 try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
                     preparedStatement.setInt(1, id);
                     ResultSet resultSet = preparedStatement.executeQuery();
@@ -98,7 +99,7 @@ public class AccountDB implements iAccountDB {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             try (Connection conn = DriverManager.getConnection(sqlurl, sqlusername, sqlpassword)){
-                String sql = "INSERT INTO accounts (login, password,name,surname,email) Values (?,?,?,?,?)";
+                String sql = "INSERT INTO accounts (login, password,name,surname,email) Values (?,?,?,?,?);";
                 try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
                     preparedStatement.setString(1, login);
                     preparedStatement.setString(2, password);
@@ -114,4 +115,74 @@ public class AccountDB implements iAccountDB {
         }
         return 0;
     }
+    public void sessionCreation(String login){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(sqlurl, sqlusername, sqlpassword)){
+
+                String sql = "UPDATE `account_stats` SET `session_creation`=session_creation+1 WHERE account_id=(SELECT account_id FROM accounts WHERE login=?)";
+                try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+                    preparedStatement.setString(1, login);
+                    preparedStatement.executeUpdate();
+                }
+            }
+        }
+        catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    public void login(String login){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(sqlurl, sqlusername, sqlpassword)){
+                String sql = "UPDATE `account_stats` SET `visits`=visits+1,`last_login`=CURRENT_DATE WHERE account_id=(SELECT account_id FROM accounts WHERE login=?)";
+                try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+                    preparedStatement.setString(1, login);
+                    preparedStatement.executeUpdate();
+                }
+            }
+        }
+        catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    public void create(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(sqlurl, sqlusername, sqlpassword)){
+                String sql = "INSERT INTO `account_stats`(`account_id`,`visits`, `session_creation`, `last_login`) VALUES ((SELECT account_id FROM accounts ORDER BY account_id DESC LIMIT 1),'1','0',CURRENT_DATE )";
+                try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+                    preparedStatement.executeUpdate();
+                }
+            }
+        }
+        catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    public Stats stats(String login){
+        Stats stats = null;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(sqlurl, sqlusername, sqlpassword)){
+
+                String sql = "SELECT * FROM account_stats WHERE account_id=(SELECT account_id FROM accounts WHERE login=?)";
+                try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+                    preparedStatement.setString(1, login);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    if(resultSet.next()){
+                        int visits = resultSet.getInt(2);
+                        int sessions = resultSet.getInt(3);
+                        String last_login = resultSet.getString(4);
+                        stats = new Stats(visits,sessions,last_login);
+                    }
+                }
+            }
+        }
+        catch(Exception ex){
+            System.out.println(ex);
+        }
+        return stats;
+    }
+
 }

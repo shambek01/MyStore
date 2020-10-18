@@ -65,4 +65,29 @@ public class ProductDB implements iProductDB {
         }
         return products;
     }
+    public Product selectById(int productId) {
+        Product product = null;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(sqlurl, sqlusername, sqlpassword)){
+
+                String sql = "SELECT * FROM products WHERE product_id=?";
+                try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+                    preparedStatement.setInt(1, productId);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    if(resultSet.next()){
+                        String description = resultSet.getString(2);
+                        int price = resultSet.getInt(3);
+                        String productImage = resultSet.getString(4);
+                        int categoryId = resultSet.getInt(5);
+                        product = new Product(productId, description, price,productImage,categoryId);
+                    }
+                }
+            }
+        }
+        catch(Exception ex){
+            System.out.println(ex);
+        }
+        return product;
+    }
 }

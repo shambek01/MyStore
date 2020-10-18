@@ -1,12 +1,10 @@
 package DBClasses;
 
+import Classes.Account;
 import Classes.Category;
 import Interfaces.iCategoryDB;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.HashSet;
 import java.util.Queue;
 
@@ -36,5 +34,28 @@ public class CategoryDB implements iCategoryDB {
             System.out.println(ex);
         }
         return categories;
+    }
+    public Category selectByID(int id){
+        Category category = null;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(sqlurl, sqlusername, sqlpassword)){
+
+                String sql = "SELECT * FROM categories WHERE category_id=?";
+                try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+                    preparedStatement.setInt(1, id);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    if(resultSet.next()){
+                        String name = resultSet.getString(2);
+                        category = new Category(id, name);
+                    }
+                }
+            }
+        }
+        catch(Exception ex){
+            System.out.println(ex);
+        }
+        return category;
+
     }
 }

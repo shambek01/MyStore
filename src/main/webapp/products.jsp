@@ -22,18 +22,13 @@
 <body>
 <c:import url = "CategoryServlet"/>
 <div class="main-wrapper">
-    <div class="banner">
-        <div class="banner-text">
-            <span class="big-text" style="color:black">CLOTHES SHOP</span>
-        </div>
-    </div>
     <div class="product-line">
-        <h1>Новое в продаже</h1>
+        <h1>${category.categoryName}</h1>
         <!-- Popular products retrieved -->
         <div class="product-grid">
             <!--<h1>${cookie['user'].value}</h1>-->
             <c:forEach var="product" items="${products}">
-                <form method="post" action="index.jsp">
+                <form method="post" action="AddToCartServlet">
                     <div class="product-item">
                         <input type="hidden" name="productid" value="${product.value.productId}">
                         <img class="product-item-img" src='${product.value.productImage}'>
@@ -44,7 +39,7 @@
                     <div class="controls-container">
                         <div class="controls-count">
                             <button class="input-button" onclick="decreaseValue('${product.value.productId}');return false">-</button>
-                            <input type="number" id="${product.value.productId}" min="1" value="1" name="count">
+                            <input type="number" id="${product.value.productId}" min="1" value="1" name="amount">
                             <button class="input-button" onclick="increaseValue('${product.value.productId}');return false">+</button>
                         </div>
                         <button class="basket-button" type="submit" name="submit"><i class="fas fa-shopping-cart"></i></button>
