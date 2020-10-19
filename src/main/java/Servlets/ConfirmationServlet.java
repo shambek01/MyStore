@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "ConfirmationServlet")
 public class ConfirmationServlet extends HttpServlet {
@@ -23,7 +24,7 @@ public class ConfirmationServlet extends HttpServlet {
         System.out.println(stats.last_visit);
         System.out.println(stats.sessions);
         request.setAttribute("stats",stats);
-        request.getRequestDispatcher("confirmation.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/confirmation.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
